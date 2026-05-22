@@ -9,7 +9,7 @@ async function signIn(username, password) {
   let webview;
   await driver.waitUntil(
     () => {
-      const contexts = driver.getContexts();
+      const contexts = await driver.getContexts();
       console.log(`@@@ contexts: ${contexts}`);
       webview = contexts.find(context => context.includes('WEBVIEW'));
       return !!webview;
