@@ -1,6 +1,6 @@
 # POC for Mobile testing using Appium & WebDriverIO
 
-1. Setup and tools
+## 1. Setup and tools
 
 - [Node.js latest LTS](https://nodejs.org/en/download)
 - [JDK latest LTS](https://www.oracle.com/java/technologies/downloads/)
@@ -11,15 +11,15 @@
 - [WebDriverIO](https://webdriver.io/)
   - [API](https://webdriver.io/docs/api/)
 
-2. Install project
+## 2. Install project
 
 ```bash
 npm i
 ```
 
-3. Utilities
+## 3. Utilities
 
-- Android Debug Bridge
+### 3.1 Android Debug Bridge
 
 ```bash
 # list connected Android devices and get their names
@@ -32,7 +32,7 @@ adb -s <deviceName> install -r </path/to/apk>
 adb -s <deviceName> shell getprop ro.build.version.release
 ```
 
-- Emulator
+### 3.2 Emulator
 
 ```bash
 # list installed emulators
@@ -42,7 +42,25 @@ emulator -list-avds
 emulator -avd Pixel_7 -wipe-data
 ```
 
-4. Run tests
+### 3.3 Appium Inspector
+
+- start appium server
+
+```bash
+npm run appium
+```
+
+- configuration example
+  ```json
+  {
+    "platformName": "Android",
+    "appium:automationName": "UiAutomator2",
+    "appium:platformVersion": "16.0",
+    "appium:deviceName": "RFCW80ZVGAB"
+  }
+  ```
+
+## 4. Run tests
 
 - start an emulator or connect a real device
 - set device `platform`, `name` and `OS version` in the corresponding WebdriverIO config file ([Android](./wdio.android.conf.js)/[iOS](./wdio.ios.conf.js))

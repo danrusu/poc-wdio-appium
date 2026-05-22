@@ -1,7 +1,8 @@
 {
   "name": "poc-wdio-appium",
   "type": "module",
-    "scripts": {
+  "scripts": {
+    "appium": "appium --address 127.0.0.1 --port 4723 --relaxed-security",
     "test:android": "wdio run ./wdio.android.conf.js",
     "test:ios": "wdio run ./wdio.ios.conf.js"
   },
