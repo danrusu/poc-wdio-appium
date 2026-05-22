@@ -16,7 +16,29 @@
 npm i
 ```
 
-3. Run tests
+3. Utilities
+
+- Android Debug Bridge
+
+```bash
+# list connected Android devices and get their names
+adb devices -l
+
+# clean install apk on device
+adb -s <deviceName> install -r </path/to/apk>
+```
+
+- Emulator
+
+```bash
+# list installed emulators
+emulator -list-avds
+
+# start an emulator
+emulator -avd Pixel_7 -wipe-data
+```
+
+4. Run tests
 
 - start an emulator or connect a real device
 - set device platform, name and system version to the corresponding WebdriverIO config file (Android/iOS)
