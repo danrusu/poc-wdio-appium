@@ -45,7 +45,7 @@ emulator -avd Pixel_7 -wipe-data
 4. Run tests
 
 - start an emulator or connect a real device
-- set device platform, name and system version in the corresponding WebdriverIO config file ([Android](./wdio.android.conf.js)/[iOS](./wdio.ios.conf.js))
+- set device `platform`, `name` and `OS version` in the corresponding WebdriverIO config file ([Android](./wdio.android.conf.js)/[iOS](./wdio.ios.conf.js))
 
   i.e.
   - Android
