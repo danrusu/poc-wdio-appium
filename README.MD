@@ -9,8 +9,9 @@
   - add to user/system Path: `ANDROID_SDK_ROOT/platform-tools` and `ANDROID_SDK_ROOT/emulator` to mainly use `adb` and `emulator` commands
 - [Appium Inspector](https://github.com/appium/appium-inspector/releases)
 - [WebDriverIO](https://webdriver.io/)
+  - [API](https://webdriver.io/docs/api/)
 
-2. Install project
+1. Install project
 
 ```bash
 npm i

@@ -1,13 +1,13 @@
-import { $, browser } from '@wdio/globals';
+import { $, driver } from '@wdio/globals';
 
 async function signIn(username, password) {
-  await browser.pause(10000);
+  await driver.pause(10000);
 
   const signInButton = await $('//*[@text="Sign In"]');
   await signInButton.click();
 
   let webview;
-  await browser.waitUntil(
+  await driver.waitUntil(
     () => {
       const contexts = driver.getContexts();
       console.log(`@@@ contexts: ${contexts}`);
@@ -36,4 +36,4 @@ async function signIn(username, password) {
   await logInButton.click();
 }
 
-module.exports = { signIn };
+export { signIn };
