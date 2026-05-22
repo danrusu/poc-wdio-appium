@@ -11,7 +11,7 @@
 - [WebDriverIO](https://webdriver.io/)
   - [API](https://webdriver.io/docs/api/)
 
-1. Install project
+2. Install project
 
 ```bash
 npm i
