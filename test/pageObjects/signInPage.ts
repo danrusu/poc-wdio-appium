@@ -1,6 +1,6 @@
 import { $, driver } from '@wdio/globals';
 
-async function signIn(username, password) {
+async function signIn(username: string, password: string) {
   const signInButton = await $('//*[@text="Sign In"]');
   await signInButton.waitForDisplayed({
     timeout: 20_000,
@@ -28,11 +28,11 @@ async function signIn(username, password) {
   const passwordInput = await $('#password');
   await passwordInput.setValue(password);
 
-  const logInButton = await $('//*[contains(@text, "LOG IN")]');
+  const logInButton = await $('//*[normalize-space()="LOG IN"]');
   await logInButton.click();
 }
 
-async function waitForWebView(timeout = 10_000) {
+async function waitForWebView(timeout = 10_000): Promise<string> {
   let webViewContext;
 
   await browser.waitUntil(
@@ -41,7 +41,7 @@ async function waitForWebView(timeout = 10_000) {
       console.log('@@@ Available contexts:', contexts);
 
       webViewContext = contexts.find(ctx =>
-        ctx.toLowerCase().includes('webview'),
+        ctx.toString().toLowerCase().includes('webview'),
       );
 
       return !!webViewContext;
@@ -52,6 +52,10 @@ async function waitForWebView(timeout = 10_000) {
       timeoutMsg: `webView context not found in ${timeout} ms`,
     },
   );
+
+  if (!webViewContext) {
+    throw new Error('WebView context not found');
+  }
 
   return webViewContext;
 }

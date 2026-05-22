@@ -1,4 +1,4 @@
-import { signIn } from '../pageobjects/signInPage.js';
+import { signIn } from '../pageObjects/signInPage';
 
 describe('AllinOne App suite', () => {
   it('should login with valid credentials', async () => {
