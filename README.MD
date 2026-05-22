@@ -18,6 +18,51 @@ npm i
 
 3. Run tests
 
+- start an emulator or connect a real device
+- set device platform, name and system version to the corresponding WebdriverIO config file (Android/iOS)
+
+  i.e.
+  - Android
+
+  ```json
+  {
+    "capabilities": [
+      {
+        "platformName": "Android",
+        "appium:automationName": "UiAutomator2",
+        "appium:platformVersion": "16.0",
+        "appium:deviceName": "RFCW80ZVGAB",
+        "appium:fullReset": true,
+        "appium:app": "/path/to/MyApp.apk"
+      }
+    ]
+  }
+  ```
+
+  - iOS
+
+  ```json
+  {
+    "capabilities": [
+      {
+        "platformName": "iOS",
+        "appium:automationName": "XCUITest",
+        "appium:deviceName": "iPhone 15",
+        "appium:platformVersion": "17.5",
+
+        "appium:noReset": true,
+        "appium:app": "/path/to/MyApp.app",
+
+        // Required for real devices
+        "appium:xcodeOrgId": "ABCDE12345",
+        "appium:xcodeSigningId": "Apple Development"
+      }
+    ]
+  }
+  ```
+
+- run the tests
+
 ```bash
 npm run test:android
 npm run test:ios

@@ -2,7 +2,7 @@ node_modules/
 
 app/android/*
 app/ios/*
-!app/**/.gitkeep
+!app/*/.gitkeep
 
 logs/
 
