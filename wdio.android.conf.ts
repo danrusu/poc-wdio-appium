@@ -8,7 +8,7 @@ export const config = {
   runner: 'local',
   port: 4723,
 
-  specs: ['./test/specs/**/*.js'],
+  specs: ['./src/test/**/*.ts'],
   exclude: [
     // 'path/to/excluded/files'
   ],
@@ -19,19 +19,22 @@ export const config = {
   maxInstances: 10,
   capabilities: [
     {
-      platformName: 'iOS',
+      // capabilities for local Appium web tests on an Android Emulator
+      platformName: 'Android',
 
-      'appium:automationName': 'XCUITest',
-      'appium:deviceName': 'iPhone 15',
-      'appium:platformVersion': '17.5',
+      'appium:automationName': 'UiAutomator2',
+      'appium:platformVersion': '16.0',
+      // 'appium:platformVersion': '17.0',
+      'appium:deviceName': 'RFCW80ZVGAB',
+      // 'appium:deviceName': 'emulator-5554',
 
-      'appium:app': '/path/to/MyApp.app',
+      'appium:fullReset': true,
+      'appium:app': path.join(process.cwd(), 'app', 'android', 'AllinOne.apk'),
 
-      // Required for real devices
-      'appium:xcodeOrgId': 'ABCDE12345',
-      'appium:xcodeSigningId': 'Apple Development',
-
-      'appium:noReset': true,
+      // 'appium:chromedriverAutodownload': true,
+      // 'appium:chromedriverExecutableDir': undefined,
+      // 'appium:autoWebview': false,
+      'appium:chromedriverExecutableDir': './drivers/chrome',
     },
   ],
 
