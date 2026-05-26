@@ -1,6 +1,8 @@
 import { $, driver } from '@wdio/globals';
 
-async function signIn(username: string, password: string) {
+import { waitForWebView, switchContextToNativeApp } from '../utils/utils';
+
+export async function signIn(username: string, password: string) {
   const signInButton = await $('//*[@text="Sign In"]');
   await signInButton.waitForDisplayed({
     timeout: 20_000,
@@ -14,8 +16,6 @@ async function signIn(username: string, password: string) {
   const handles = await driver.getWindowHandles();
   console.log(`@@@ Window handles: ${handles}`);
   await driver.switchToWindow(handles[0]);
-  const url = await driver.getUrl();
-  console.log(`@@@ Webview current URL: ${url}`);
 
   const usernameInput = await $('#username');
   await usernameInput.waitForDisplayed({
@@ -28,36 +28,11 @@ async function signIn(username: string, password: string) {
   const passwordInput = await $('#password');
   await passwordInput.setValue(password);
 
-  const logInButton = await $('//*[normalize-space()="LOG IN"]');
+  // await driver.hideKeyboard();
+  // await driver.pause(2000);
+
+  const logInButton = await $('button[type=submit]');
   await logInButton.click();
+
+  await switchContextToNativeApp();
 }
-
-async function waitForWebView(timeout = 10_000): Promise<string> {
-  let webViewContext;
-
-  await browser.waitUntil(
-    async () => {
-      const contexts = await browser.getContexts();
-      console.log('@@@ Available contexts:', contexts);
-
-      webViewContext = contexts.find(ctx =>
-        ctx.toString().toLowerCase().includes('webview'),
-      );
-
-      return !!webViewContext;
-    },
-    {
-      timeout,
-      interval: 500,
-      timeoutMsg: `webView context not found in ${timeout} ms`,
-    },
-  );
-
-  if (!webViewContext) {
-    throw new Error('WebView context not found');
-  }
-
-  return webViewContext;
-}
-
-export { signIn };

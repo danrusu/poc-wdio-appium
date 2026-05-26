@@ -8,7 +8,7 @@ export const config = {
   runner: 'local',
   port: 4723,
 
-  specs: ['./test/specs/**/*.js'],
+  specs: ['./src/test/**/*.ts'],
   exclude: [
     // 'path/to/excluded/files'
   ],

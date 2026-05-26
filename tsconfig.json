@@ -21,5 +21,5 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["test", "wdio.android.conf.ts", "wdio.ios.conf.ts"]
+  "include": ["src", "wdio.android.conf.ts", "wdio.ios.conf.ts"]
 }
