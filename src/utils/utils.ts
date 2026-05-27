@@ -29,3 +29,23 @@ export async function waitForWebView(timeout = 10_000): Promise<string> {
 export async function switchContextToNativeApp() {
   return await browser.switchContext('NATIVE_APP');
 }
+
+export async function scrollUntilVisible(selector: string, maxSwipes = 10) {
+  for (let i = 0; i < maxSwipes; i++) {
+    const element = await $(selector);
+
+    if (await element.isDisplayed()) {
+      return element;
+    }
+
+    await driver.touchAction([
+      { action: 'press', x: 500, y: 1600 },
+      { action: 'moveTo', x: 500, y: 400 },
+      { action: 'release' },
+    ]);
+
+    await driver.pause(1000);
+  }
+
+  throw new Error('Element not found after maximum swipes');
+}
