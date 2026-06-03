@@ -71,12 +71,7 @@ jobs:
             adb shell settings put global transition_animation_scale 0
             adb shell settings put global animator_duration_scale 0
 
-            nohup appium \
-              --address $APPIUM_HOST \
-              --port $APPIUM_PORT \
-              --base-path $APPIUM_BASE_PATH \
-              --log ./appium.log \
-              > ./appium.out 2>&1 &
+            nohup appium --address $APPIUM_HOST --port $APPIUM_PORT --base-path $APPIUM_BASE_PATH --log ./appium.log > ./appium.out 2>&1 &
 
             echo "Waiting for Appium to be ready..."
             APPIUM_URL="http://$APPIUM_HOST:$APPIUM_PORT$APPIUM_BASE_PATH/status"
@@ -108,4 +103,6 @@ jobs:
           name: test-artifacts
           path: |
             logs
+            ./appium.log
+            ./appium.out
           if-no-files-found: ignore
