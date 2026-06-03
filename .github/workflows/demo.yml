@@ -1,0 +1,16 @@
+name: POC
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: macos-26-intel
+    timeout-minutes: 60
+
+    steps:
+      - name: Create .env file
+        run: |
+          echo "TEST_USER_1_USERNAME=${{ secrets.TEST_USER_1_USERNAME }}" >> .env
+          echo "TEST_USER_1_PASSWORD=${{ secrets.TEST_USER_1_PASSWORD }}" >> .env
+          cat .env
