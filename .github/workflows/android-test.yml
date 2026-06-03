@@ -60,31 +60,7 @@ jobs:
             adb devices
             adb wait-for-device
 
-            echo "Waiting for emulator to come online..."
-            for i in {1..30}; do
-              echo "Attempt $i/30"
-              adb devices
-
-              if adb shell true >/dev/null 2>&1; then
-
-                boot_completed="$(adb shell getprop sys.boot_completed 2>/dev/null | tr -d '\r')"
-              
-                if [[ "$boot_completed" == "1" ]]; then
-                  echo "Emulator is online and boot completed"
-                  break
-                fi
-              else
-                echo "ADB shell not ready yet"
-              fi
-
-              if [[ "$i" == "30" ]]; then
-                echo "Emulator failed to become ready"
-                adb devices
-                exit 1
-              fi
-
-              sleep 5
-            done
+            sleep 30
 
             adb shell getprop sys.boot_completed
             adb shell getprop ro.build.version.release
