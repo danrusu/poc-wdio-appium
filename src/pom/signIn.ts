@@ -2,9 +2,11 @@ import { $, driver } from '@wdio/globals';
 
 import { waitForWebView, switchContextToNativeApp } from '../utils/utils';
 
-export async function signIn(testUser: string) {
-  const username = process.env[`${testUser}_USERNAME`];
-  const password = process.env[`${testUser}_PASSWORD`];
+async function signIn(testUser: string) {
+  const username =
+    process.env[`${testUser}_USERNAME`] || `not_found_${testUser}_USERNAME`;
+  const password =
+    process.env[`${testUser}_PASSWORD`] || `not_found_${testUser}_PASSWORD`;
 
   const signInButton = await $('//*[@text="Sign In"]');
   await signInButton.waitForDisplayed({
@@ -40,3 +42,5 @@ export async function signIn(testUser: string) {
 
   await switchContextToNativeApp();
 }
+
+export default signIn;

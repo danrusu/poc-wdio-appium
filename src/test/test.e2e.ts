@@ -1,5 +1,5 @@
-import { signIn } from '../pom/signIn';
 import {
+  signIn,
   homePage,
   shopPage,
   shoppingCartPage,
