@@ -53,7 +53,6 @@ jobs:
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none -no-metrics -no-snapshot -wipe-data
           script: |
-            adb start-server
             adb devices
             adb wait-for-device
 
