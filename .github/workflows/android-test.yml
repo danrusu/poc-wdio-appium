@@ -40,11 +40,12 @@ jobs:
         run: |
           npm install -g appium
 
-      - name: Run Android emulator, start Appium, and execute WDIO tests
+      - name: Run Android emulator
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 33
-          arch: arm64-v8a
+          arch: x86_64
+          # arch: arm64-v8a
           profile: pixel_7
           target: google_apis
           emulator-boot-timeout: 900
@@ -64,37 +65,32 @@ jobs:
             adb shell settings put global transition_animation_scale 0
             adb shell settings put global animator_duration_scale 0
 
-            nohup appium \
-              --address $APPIUM_HOST \
-              --port $APPIUM_PORT \
-              --base-path $APPIUM_BASE_PATH \
-              --log ./appium.log \
-              > ./appium.out 2>&1 &
+      - name: Start Appium server
+        run: |
+          nohup appium \
+            --address $APPIUM_HOST \
+            --port $APPIUM_PORT \
+            --base-path $APPIUM_BASE_PATH \
+            --log ./appium.log \
+            > ./appium.out 2>&1 &
 
-            echo "Waiting for Appium to be ready..."
-            APPIUM_URL="http://$APPIUM_HOST:$APPIUM_PORT$APPIUM_BASE_PATH/status"
+          echo "Waiting for Appium to be ready..."
+          APPIUM_URL="http://$APPIUM_HOST:$APPIUM_PORT$APPIUM_BASE_PATH/status"
 
-            for i in {1..30}; do
-              if curl --silent --fail $APPIUM_URL > /dev/null; then
-                echo "Appium is ready"
-                break
-              fi
-              echo "Appium not ready yet, retrying..."
-              sleep 2
-            done
+          for i in {1..30}; do
+            if curl --silent --fail $APPIUM_URL > /dev/null; then
+              echo "Appium is ready"
+              break
+            fi
+            echo "Appium not ready in $(( (i-1)*2 )) seconds, retrying..."
+            sleep 2
+          done
 
-            curl --fail $APPIUM_URL
+          curl --fail $APPIUM_URL
 
-            npm run test:demo
-
-      - name: Upload Appium logs
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: appium-logs
-          path: |
-            logs/wdio-appium.log
-            logs/report.json
+      - name: Run Tests
+        run: |
+          npm run test:demo
 
       - name: Upload test artifacts
         if: always()
@@ -102,8 +98,5 @@ jobs:
         with:
           name: test-artifacts
           path: |
-            screenshots
-            reports
-            allure-results
             logs
           if-no-files-found: ignore
