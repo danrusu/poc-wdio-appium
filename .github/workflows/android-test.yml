@@ -76,14 +76,16 @@ jobs:
             echo "Waiting for Appium to be ready..."
             APPIUM_URL="http://$APPIUM_HOST:$APPIUM_PORT$APPIUM_BASE_PATH/status"
 
-            for i in {1..30}; do
-              if curl --silent --fail $APPIUM_URL > /dev/null; then
-                echo "Appium is ready"
-                break
-              fi
-              echo "Appium not ready in $(( (i-1)*2 )) seconds, retrying..."
-              sleep 2
-            done
+            sleep 30
+
+            # for i in {1..30}; do
+            #   if curl --silent --fail $APPIUM_URL > /dev/null; then
+            #     echo "Appium is ready"
+            #     break
+            #   fi
+            #   echo "Appium not ready in $(( (i-1)*2 )) seconds, retrying..."
+            #   sleep 2
+            # done
 
             curl --fail $APPIUM_URL
 
