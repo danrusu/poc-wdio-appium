@@ -44,7 +44,6 @@ jobs:
         run: |
           echo "TEST_USER_1_USERNAME=${{ secrets.TEST_USER_1_USERNAME }}" >> .env
           echo "TEST_USER_1_PASSWORD=${{ secrets.TEST_USER_1_PASSWORD }}" >> .env
-          cat .env
 
       - name: Run Android emulator, start Appium
         uses: reactivecircus/android-emulator-runner@v2
