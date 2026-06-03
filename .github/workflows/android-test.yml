@@ -40,11 +40,6 @@ jobs:
         run: |
           npm install -g appium
 
-      - name: Create .env file
-        run: |
-          echo "TEST_USER_1_USERNAME=${{ secrets.TEST_USER_1_USERNAME }}" >> .env
-          echo "TEST_USER_1_PASSWORD=${{ secrets.TEST_USER_1_PASSWORD }}" >> .env
-
       - name: Run Android emulator, start Appium
         uses: reactivecircus/android-emulator-runner@v2
         with:
@@ -120,6 +115,11 @@ jobs:
             done
 
             curl --fail $APPIUM_URL
+
+      - name: Create .env file
+        run: |
+          echo "TEST_USER_1_USERNAME=${{ secrets.TEST_USER_1_USERNAME }}" >> .env
+          echo "TEST_USER_1_PASSWORD=${{ secrets.TEST_USER_1_PASSWORD }}" >> .env
 
       - name: Run Tests
         run: |
