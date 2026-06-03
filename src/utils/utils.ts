@@ -38,11 +38,22 @@ export async function scrollUntilVisible(selector: string, maxSwipes = 10) {
       return element;
     }
 
-    await driver.touchAction([
-      { action: 'press', x: 500, y: 1600 },
-      { action: 'moveTo', x: 500, y: 400 },
-      { action: 'release' },
+    await driver.performActions([
+      {
+        type: 'pointer',
+        id: 'finger1',
+        parameters: { pointerType: 'touch' },
+        actions: [
+          { type: 'pointerMove', duration: 0, x: 500, y: 1600 },
+          { type: 'pointerDown', button: 0 },
+          { type: 'pause', duration: 100 },
+          { type: 'pointerMove', duration: 600, x: 500, y: 400 },
+          { type: 'pointerUp', button: 0 },
+        ],
+      },
     ]);
+
+    await driver.releaseActions();
 
     await driver.pause(1000);
   }

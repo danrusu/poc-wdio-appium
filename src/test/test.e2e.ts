@@ -1,23 +1,27 @@
-import HomePage from '../pom/HomePage';
 import { signIn } from '../pom/signIn';
-import { scrollUntilVisible } from '../utils/utils';
+import {
+  homePage,
+  shopPage,
+  shoppingCartPage,
+  addedToBasketPage,
+} from '../pom';
 
-describe('AllinOne App suite', () => {
-  it('should login with valid credentials', async () => {
-    await signIn('fire@hihi.lol', '12345Test54321?');
-    // await signIn('andro@hihi.lol', '1234567890Abc?');
-
-    const homePage = new HomePage();
+describe('AllinOne App Test Suite', () => {
+  it('should add product to cart and proceed to checkout', async () => {
+    await signIn('TEST_USER_1');
 
     await homePage.tapGroheShop();
-    await driver.pause(5_000);
 
-    //await homePage.enterShop('Germany');
-    await (await scrollUntilVisible(`//*[@text="Add to Cart"]`)).click();
+    // add first product to cart
+    await shopPage.addToCart();
 
-    await $(`//*[@text="View Cart"]`).click();
-    await $(`//*[@text="Checkout]`).click();
+    await addedToBasketPage.continueShopping();
 
-    await driver.pause(10_000);
+    // add second product to cart
+    await shopPage.addToCart();
+
+    await addedToBasketPage.viewCart();
+
+    await shoppingCartPage.goToCheckout();
   });
 });

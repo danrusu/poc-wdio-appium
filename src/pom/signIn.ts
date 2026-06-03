@@ -2,7 +2,10 @@ import { $, driver } from '@wdio/globals';
 
 import { waitForWebView, switchContextToNativeApp } from '../utils/utils';
 
-export async function signIn(username: string, password: string) {
+export async function signIn(testUser: string) {
+  const username = process.env[`${testUser}_USERNAME`];
+  const password = process.env[`${testUser}_PASSWORD`];
+
   const signInButton = await $('//*[@text="Sign In"]');
   await signInButton.waitForDisplayed({
     timeout: 20_000,

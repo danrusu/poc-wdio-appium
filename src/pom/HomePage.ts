@@ -1,4 +1,4 @@
-export default class HomePage {
+class HomePage {
   private get groheShop() {
     return $('//*[@text="Tap to visit the GROHE shop"]');
   }
@@ -18,3 +18,5 @@ export default class HomePage {
     await $('//android.widget.TextView[@text="Enter Shop"]').click();
   }
 }
+
+export default new HomePage();

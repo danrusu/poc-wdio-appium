@@ -8,3 +8,5 @@ app/ios/*
 logs/
 
 drivers/
+
+.env
