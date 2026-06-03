@@ -78,15 +78,6 @@ jobs:
 
             sleep 30
 
-            # for i in {1..30}; do
-            #   if curl --silent --fail $APPIUM_URL > /dev/null; then
-            #     echo "Appium is ready"
-            #     break
-            #   fi
-            #   echo "Appium not ready in $(( (i-1)*2 )) seconds, retrying..."
-            #   sleep 2
-            # done
-
             curl --fail $APPIUM_URL
 
       - name: Create .env file
