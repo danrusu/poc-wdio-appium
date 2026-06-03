@@ -25,7 +25,7 @@ export const config = {
       'appium:automationName': 'UiAutomator2',
       'appium:platformVersion': '16.0',
       // 'appium:platformVersion': '17.0',
-      'appium:deviceName': 'RFCW80ZVGAB',
+      'appium:deviceName': 'adb-RFCW80ZVGAB-MHi4Se._adb-tls-connect._tcp',
       // 'appium:deviceName': 'emulator-5554',
 
       'appium:fullReset': true,
