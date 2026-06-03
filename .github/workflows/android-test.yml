@@ -55,7 +55,11 @@ jobs:
           target: google_apis
           emulator-boot-timeout: 900
           disable-animations: true
-          force-avd-creation: false
+          force-avd-creation: true
+          pre-emulator-launch-script: |
+            adb kill-server || true
+            adb start-server
+            adb devices
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none -no-metrics -no-snapshot -wipe-data
           script: |
             adb devices
