@@ -50,6 +50,7 @@ jobs:
           profile: pixel_7
           target: google_apis
           emulator-boot-timeout: 900
+
           disable-animations: true
           force-avd-creation: true
           pre-emulator-launch-script: |
@@ -80,14 +81,10 @@ jobs:
 
             curl --fail "http://$APPIUM_HOST:$APPIUM_PORT$APPIUM_BASE_PATH/status"
 
-      - name: Create .env file
-        run: |
-          echo "TEST_USER_1_USERNAME=${{ secrets.TEST_USER_1_USERNAME }}" >> .env
-          echo "TEST_USER_1_PASSWORD=${{ secrets.TEST_USER_1_PASSWORD }}" >> .env
-
-      - name: Run Tests
-        run: |
-          npm run test:demo
+            echo "TEST_USER_1_USERNAME=${{ secrets.TEST_USER_1_USERNAME }}" >> .env
+            echo "TEST_USER_1_PASSWORD=${{ secrets.TEST_USER_1_PASSWORD }}" >> .env
+                
+            npm run test:demo
 
       - name: Upload test artifacts
         if: always()
