@@ -73,12 +73,11 @@ jobs:
 
             nohup appium --address $APPIUM_HOST --port $APPIUM_PORT --base-path $APPIUM_BASE_PATH --log ./appium.log > ./appium.out 2>&1 &
 
-            echo "Waiting for Appium to be ready..."
-            APPIUM_URL="http://$APPIUM_HOST:$APPIUM_PORT$APPIUM_BASE_PATH/status"
+            echo "Waiting for Appium to be ready..."            
 
             sleep 30
 
-            curl --fail $APPIUM_URL
+            curl --fail "http://$APPIUM_HOST:$APPIUM_PORT$APPIUM_BASE_PATH/status"
 
       - name: Create .env file
         run: |
