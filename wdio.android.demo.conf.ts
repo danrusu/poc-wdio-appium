@@ -23,10 +23,10 @@ export const config = {
       platformName: 'Android',
 
       'appium:automationName': 'UiAutomator2',
-      'appium:platformVersion': '16.0',
-      // 'appium:platformVersion': '17.0',
-      'appium:deviceName': 'RFCW80ZVGAB',
-      // 'appium:deviceName': 'emulator-5554',
+      // 'appium:platformVersion': '16.0',
+      // 'appium:deviceName': 'RFCW80ZVGAB',
+      'appium:platformVersion': '13.0',
+      'appium:deviceName': 'emulator-5554',
 
       'appium:fullReset': true,
       'appium:app': path.join(process.cwd(), 'app', 'android', 'demo.apk'),
