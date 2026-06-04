@@ -16,6 +16,7 @@ jobs:
       APPIUM_HOST: 127.0.0.1
       APPIUM_PORT: 4723
       APPIUM_BASE_PATH: /wd/hub
+      ANDROID_EMULATOR_WAIT_TIME_BEFORE_KILL: 1000
 
     steps:
       - name: Checkout repository
