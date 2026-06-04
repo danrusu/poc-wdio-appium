@@ -55,7 +55,7 @@ jobs:
             adb kill-server || true
             adb start-server
             adb devices
-          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none -no-metrics -no-snapshot -wipe-data
+          emulator-options: -no-window -accel on -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none -no-metrics -no-snapshot -wipe-data
           script: |
             adb devices
             adb wait-for-device
