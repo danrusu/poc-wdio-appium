@@ -9,13 +9,10 @@ on:
 
 jobs:
   android-test:
-    runs-on: macos-26-intel
+    runs-on: macos-latest
     timeout-minutes: 60
 
     env:
-      APPIUM_HOST: 127.0.0.1
-      APPIUM_PORT: 4723
-      APPIUM_BASE_PATH: /wd/hub
       ANDROID_EMULATOR_WAIT_TIME_BEFORE_KILL: 1000
 
     steps:
@@ -37,16 +34,12 @@ jobs:
       - name: Install npm dependencies
         run: npm ci
 
-      - name: Install Appium and UiAutomator2 driver
-        run: |
-          npm install -g appium
-
-      - name: Run Android emulator, start Appium
+      - name: Run Android emulator and tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 33
-          arch: x86_64
-          # arch: arm64-v8a
+          # arch: x86_64
+          arch: arm64-v8a
           profile: pixel_7
           target: google_apis
           emulator-boot-timeout: 900
@@ -57,7 +50,7 @@ jobs:
             adb kill-server || true
             adb start-server
             adb devices
-          emulator-options: -no-window -accel on -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none -no-metrics -no-snapshot -wipe-data
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none -no-metrics -no-snapshot
           script: |
             adb devices
             adb wait-for-device
@@ -68,22 +61,13 @@ jobs:
             adb shell getprop ro.build.version.release
             adb shell getprop ro.build.version.sdk
 
-
             adb shell settings put global window_animation_scale 0
             adb shell settings put global transition_animation_scale 0
             adb shell settings put global animator_duration_scale 0
 
-            nohup appium --address $APPIUM_HOST --port $APPIUM_PORT --base-path $APPIUM_BASE_PATH --log ./appium.log > ./appium.out 2>&1 &
-
-            echo "Waiting for Appium to be ready..."            
-
-            sleep 30
-
-            curl --fail "http://$APPIUM_HOST:$APPIUM_PORT$APPIUM_BASE_PATH/status"
-
             echo "TEST_USER_1_USERNAME=${{ secrets.TEST_USER_1_USERNAME }}" >> .env
             echo "TEST_USER_1_PASSWORD=${{ secrets.TEST_USER_1_PASSWORD }}" >> .env
-                
+
             npm run test:demo
 
       - name: Upload test artifacts
@@ -93,6 +77,4 @@ jobs:
           name: test-artifacts
           path: |
             logs
-            ./appium.log
-            ./appium.out
           if-no-files-found: ignore

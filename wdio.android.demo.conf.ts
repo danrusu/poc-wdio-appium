@@ -46,7 +46,7 @@ export const config = {
   // Default timeout in milliseconds for request
   // if browser driver or grid doesn't send response
   connectionRetryTimeout: 120_000,
-  uiautomator2ServerLaunchTimeout: 120_000,
+  uiautomator2ServerLaunchTimeout: 300_000,
   adbExecTimeout: 100_000,
   //
   // Default request retries count
